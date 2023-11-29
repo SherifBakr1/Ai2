@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import rospy
-import pandas as pd
-import numpy as np
+#import pandas as pd
+#import numpy as np
 import time
 import random
 import math
@@ -42,7 +42,7 @@ i_front = 0
 min_right = 0
 i_right = 0
 min_left = 0
-i_left = 0
+#i_left = 0
 front = ""
 left = ""
 right = ""
@@ -82,14 +82,14 @@ ratio_forward_and_V_hard_right                   = []
 ratio_forward_and_V_hard_left                   = []  
 
 
-def build_q_table():
-    global N_STATES
-    global ACTIONS
-    table = pd.DataFrame(
-        np.zeros((N_STATES, len(ACTIONS)), dtype=float),
-        columns=ACTIONS
-    )
-    return table
+#def build_q_table():
+#    global N_STATES
+#    global ACTIONS
+#    table = pd.DataFrame(
+#        np.zeros((N_STATES, len(ACTIONS)), dtype=float),
+#        columns=ACTIONS
+#    )
+#    return table
 
 def actor(observation, q_table, epsilon):
     rand= np.random.uniform()
