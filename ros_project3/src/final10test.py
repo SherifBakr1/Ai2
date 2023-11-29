@@ -175,10 +175,7 @@ def get_state(front, right):
     end = False
     if (range_corner == 0.0):
         range_corner= 1.0
-    if (range_right ==0.0):
-        range_right = 1.0
-    if (range_front ==0.0):
-        range_front = 1.0
+
 
     if (right == "vclose" and front =="close" and range_corner <0.7 ):
         state = 0 
@@ -294,10 +291,7 @@ def get_state_initial(front, right):
     global state              
     if (range_corner ==0.0):
         range_corner = 1.0
-    if (range_right ==0.0):
-        range_right = 1.0
-    if (range_front ==0.0):
-        range_front = 1.0
+
     if (right == "vclose" and front =="close" and range_corner <0.7):
         state = 0 
     if (right == "vclose" and front =="normal" and range_corner <0.7):
@@ -464,7 +458,7 @@ def laserscan_callback(msg):
     ranges = msg.ranges
     # You changed the range of the right messages from 275:276 to what it currently is for training on u-turn
     range_front = min(msg.ranges[0:1]) # Front2 FOV (between 5 to -5 degrees)
-    range_right = min(msg.ranges[225:315])  # right FOV (between 300 to 345 degrees)
+    range_right = min(msg.ranges[265:275])  # right FOV (between 300 to 345 degrees)
     range_left=min(msg.ranges[85:95])
     range_corner = min(msg.ranges[300:302])
     
