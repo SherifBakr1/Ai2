@@ -13,7 +13,7 @@ def laserscan_callback(msg):
     # Print or process the right 5 degrees lidar data
     #print("Right", msg.ranges[270:271])
     ##print("Front", msg.ranges[0:1])
-    print("Back: ", min(msg.ranges[180:190]) )
+    #print("Back: ", min(msg.ranges[180:190]) )
     #if min(msg.ranges[330:331]) > 2:
     #print("Laila 3elwy")
     print ("Front: ", min(msg.ranges[0:1]))
