@@ -169,6 +169,7 @@ def publish_all():
     
 def get_state(front, right):
     global state
+    global range_corner
     end = False
     if (range_corner == 0.0):
         range_corner= 1.0
@@ -281,6 +282,7 @@ def get_state(front, right):
     return state, reward, end
 
 def get_state_initial(front, right):
+    global range_corner
     global state              
     if (range_corner ==0.0):
         range_corner = 1.0
@@ -365,8 +367,6 @@ def Qlearn():
     except FileNotFoundError:
         print("file not found")
         return
-
-
     episode = 801
 
     while episode < (MAX_EPISODE):
