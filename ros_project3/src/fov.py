@@ -18,7 +18,7 @@ def laserscan_callback(msg):
     print("Laila 3elwy")
 
 
-    range_right = min(msg.ranges[259:260])  # right FOV (between 300 to 345 degrees)
+    #range_right = min(msg.ranges[259:260])  # right FOV (between 300 to 345 degrees)
     #min_right,i_right = min( (range_right[i_right],i_right) for i_right in range(len(range_right)) )
 
     print("min right: ", min_right)
