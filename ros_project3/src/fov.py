@@ -18,6 +18,7 @@ def laserscan_callback(msg):
     #print("Laila 3elwy")
     print ("Front: ", min(msg.ranges[0:1]))
     print("Right: ", min(msg.ranges[225:315]))
+    print("Corner: ", min(msg.ranges[300:302]))
 
     #range_right = min(msg.ranges[259:260])  # right FOV (between 300 to 345 degrees)
     #min_right,i_right = min( (range_right[i_right],i_right) for i_right in range(len(range_right)) )
