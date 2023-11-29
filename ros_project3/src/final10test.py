@@ -458,7 +458,7 @@ def laserscan_callback(msg):
     ranges = msg.ranges
     # You changed the range of the right messages from 275:276 to what it currently is for training on u-turn
     range_front = min(msg.ranges[0:1]) # Front2 FOV (between 5 to -5 degrees)
-    range_right = min(msg.ranges[260:280])  # right FOV (between 300 to 345 degrees)
+    range_right = min(msg.ranges[260:270])  # right FOV (between 300 to 345 degrees)
     range_left=min(msg.ranges[85:95])
     range_corner = min(msg.ranges[300:302])
     
