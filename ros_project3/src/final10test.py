@@ -170,9 +170,15 @@ def publish_all():
 def get_state(front, right):
     global state
     global range_corner
+    global range_right
+    global range_front
     end = False
     if (range_corner == 0.0):
         range_corner= 1.0
+    if (range_right ==0.0):
+        range_right = 1.0
+    if (range_front ==0.0):
+        range_front = 1.0
 
     if (right == "vclose" and front =="close" and range_corner <0.7 ):
         state = 0 
@@ -283,9 +289,15 @@ def get_state(front, right):
 
 def get_state_initial(front, right):
     global range_corner
+    global range_front
+    global range_right
     global state              
     if (range_corner ==0.0):
         range_corner = 1.0
+    if (range_right ==0.0):
+        range_right = 1.0
+    if (range_front ==0.0):
+        range_front = 1.0
     if (right == "vclose" and front =="close" and range_corner <0.7):
         state = 0 
     if (right == "vclose" and front =="normal" and range_corner <0.7):
