@@ -97,19 +97,19 @@ def move_robot(speed_linear_x, speed_angular_z):
 def move_robot_by_action(action):
     if action == 'FORWARD_AND_TURN_LITTLE_LEFT':
         move_robot(0.16, 0.20)
-        rospy.sleep(0.5)
+        rospy.sleep(0.3)
     elif action == 'FORWARD':
         move_robot(0.16, 0.0)
-        rospy.sleep(0.5)
+        rospy.sleep(0.3)
     elif action == 'FORWARD_AND_TURN_LITTLE_RIGHT':
         move_robot(0.16, -0.20)
-        rospy.sleep(0.5)
+        rospy.sleep(0.3)
     elif action == 'FORWARD_AND_HARD_LEFT':
         move_robot(0.10, 0.60)
-        rospy.sleep(0.5)
+        rospy.sleep(0.3)
     elif action == 'FORWARD_AND_HARD_RIGHT':
         move_robot(0.10, -0.60)
-        rospy.sleep(0.5)
+        rospy.sleep(0.3)
 
 def stopRobot():
     move_robot(0.0,0.0)
