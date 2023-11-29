@@ -361,14 +361,13 @@ def Qlearn():
     try:
         with open(csv_File_path, mode='r') as file:
             reader = csv.reader(file)
-            q_table = {int(rows[0]): {action: float(value) for action, value in zip(ACTIONS, rows[1:])} for rows in reader}
+            q_table = {int(rows[0]): {action: float(value) for action, value in zip(ACTIONS, rows[1:])} for rows in reader if rows[0].isdigit()}
     except FileNotFoundError:
         print("file not found")
         return
 
 
     episode = 801
-    epsilon = 0.9
 
     while episode < (MAX_EPISODE):
         print("entered while loop")
