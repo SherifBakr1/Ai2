@@ -31,7 +31,7 @@ cmd_vel_pub = rospy.Publisher("/cmd_vel", Twist, queue_size=1)
 
 N_STATES = 26
 N_ACTIONS = 5
-
+print("no of states received")
 # Initialize all variables
 range_front = []
 range_right = []
@@ -81,15 +81,6 @@ ratio_forward_and_hard_right                   = []
 ratio_forward_and_V_hard_right                   = []  
 ratio_forward_and_V_hard_left                   = []  
 
-
-#def build_q_table():
-#    global N_STATES
-#    global ACTIONS
-#    table = pd.DataFrame(
-#        np.zeros((N_STATES, len(ACTIONS)), dtype=float),
-#        columns=ACTIONS
-#    )
-#    return table
 
 def actor(observation, q_table, epsilon):
     rand= np.random.uniform()
@@ -180,58 +171,58 @@ def publish_all():
         #action_forward_with_hard_right.publish(msg)
 
 
-def init_env(episode, total_episode):
+#def init_env(episode, total_episode):
     
-    threshold = math.ceil(total_episode / 3)
-    if episode <= threshold:
-        world_x = 0.25
-        world_y = -2.0
-        world_orientation_x = 0.0
-        world_orientation_y = 0.0
-        world_orientation_z = 0.0
-        world_orientation_w = 1
-        
-    elif (threshold < episode < (2 * threshold)):
-        world_x = 1.8
-        world_y = -2.0
-        world_orientation_x = 0.0
-        world_orientation_y = 0.0
-        world_orientation_z = 0.0
-        world_orientation_w = 1
-
-
-    elif ((2 * threshold) <= episode <= total_episode):
-        world_x = 1.5
-        world_y = -1.0
-        world_orientation_x = 0
-        world_orientation_y = 0
-        world_orientation_z = 3.15
-        world_orientation_w = 0
-
-    else:
-        world_x = 0.1
-        world_y = -2.0
-        world_orientation_x = 0.0
-        world_orientation_y = 0.0
-        world_orientation_z = 0.0
-        world_orientation_w = 1
-
-    state_msg = ModelState()
-    state_msg.model_name = 'turtlebot3_waffle_pi'
-    state_msg.pose.position.x = world_x
-    state_msg.pose.position.y = world_y
-    state_msg.pose.position.z = 0
-    state_msg.pose.orientation.x = world_orientation_x
-    state_msg.pose.orientation.y = world_orientation_y
-    state_msg.pose.orientation.z = world_orientation_z
-    state_msg.pose.orientation.w = world_orientation_w
-    try:
-        resp = gazebo_set_state_srv( state_msg )
-    except rospy.ServiceException as e:
-        print ("Service call failed: %s" % e)
-    
-    end = False #to start the new episode
-    return end
+#    threshold = math.ceil(total_episode / 3)
+ #   if episode <= threshold:
+  #      world_x = 0.25
+   #     world_y = -2.0
+    #    world_orientation_x = 0.0
+     #   world_orientation_y = 0.0
+#        world_orientation_z = 0.0
+ #       world_orientation_w = 1
+  #      
+   # elif (threshold < episode < (2 * threshold)):
+#        world_x = 1.8
+ #       world_y = -2.0
+  #      world_orientation_x = 0.0
+    #    world_orientation_y = 0.0
+    #    world_orientation_z = 0.0
+    #    world_orientation_w = 1
+#
+#
+ #   elif ((2 * threshold) <= episode <= total_episode):
+ #       world_x = 1.5
+  #      world_y = -1.0
+  #      world_orientation_x = 0
+  #      world_orientation_y = 0
+  #      world_orientation_z = 3.15
+  #      world_orientation_w = 0
+#
+ #   else:
+ #       world_x = 0.1
+ #       world_y = -2.0
+ #       world_orientation_x = 0.0
+ #       world_orientation_y = 0.0
+ #       world_orientation_z = 0.0
+ #       world_orientation_w = 1
+#
+ #   state_msg = ModelState()
+ #   state_msg.model_name = 'turtlebot3_waffle_pi'
+ #   state_msg.pose.position.x = world_x
+ #   state_msg.pose.position.y = world_y
+ #   state_msg.pose.position.z = 0
+ #   state_msg.pose.orientation.x = world_orientation_x
+ #   state_msg.pose.orientation.y = world_orientation_y
+ #   state_msg.pose.orientation.z = world_orientation_z
+#    state_msg.pose.orientation.w = world_orientation_w
+#    try:
+#        resp = gazebo_set_state_srv( state_msg )
+#    except rospy.ServiceException as e:
+#        print ("Service call failed: %s" % e)
+#    
+#    end = False #to start the new episode
+#    return end
     
 def get_state(front, right):
     global state
@@ -433,6 +424,7 @@ def Qlearn():
  #   plt.ion()
  #   plt.show()
     while episode < (MAX_EPISODE):
+        print("entered while loop")
         if rospy.is_shutdown():
             break
         
@@ -520,9 +512,9 @@ def Qlearn():
             
         episode = episode +1
         print("The episode we're currently in is episode: ", episode)
-        publish_all()
-        save_to_filename = "%s/Q_Table_episode_%d.csv" % (rospack_path, episode)
-        q_table.to_csv(save_to_filename)
+        #publish_all()
+        #save_to_filename = "%s/Q_Table_episode_%d.csv" % (rospack_path, episode)
+        #q_table.to_csv(save_to_filename)
         # rospy.sleep(0.1)
         
   #      plt.clf()
@@ -591,11 +583,11 @@ def laserscan_callback(msg):
 if __name__ == "__main__":
     rospy.init_node('wall_follower_node', anonymous=True)
 
-    rospy.wait_for_service("/gazebo/reset_world")
-    rospy.wait_for_service('/gazebo/set_model_state')
+    #rospy.wait_for_service("/gazebo/reset_world")
+    #rospy.wait_for_service('/gazebo/set_model_state')
 
-    gazebo_reset_world_srv = rospy.ServiceProxy("/gazebo/reset_world", Empty)
-    gazebo_set_state_srv = rospy.ServiceProxy("/gazebo/set_model_state", SetModelState)
+    #gazebo_reset_world_srv = rospy.ServiceProxy("/gazebo/reset_world", Empty)
+    #gazebo_set_state_srv = rospy.ServiceProxy("/gazebo/set_model_state", SetModelState)
     
     rospy.Subscriber("/scan", LaserScan, laserscan_callback, queue_size=1)
 
