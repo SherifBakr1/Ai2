@@ -5,7 +5,7 @@ import rospy
 import time
 import random
 import math
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import rospkg
 
 from std_msgs.msg import Float32, Int64
@@ -429,9 +429,9 @@ def Qlearn():
     episode = 801
     epsilon = 0.9
 
-    plt.figure(figsize=(10,6))
-    plt.ion()
-    plt.show()
+ #   plt.figure(figsize=(10,6))
+ #   plt.ion()
+ #   plt.show()
     while episode < (MAX_EPISODE):
         if rospy.is_shutdown():
             break
@@ -525,17 +525,17 @@ def Qlearn():
         q_table.to_csv(save_to_filename)
         # rospy.sleep(0.1)
         
-        plt.clf()
-        plt.plot(range(len(ratio_forward_and_V_hard_left)), ratio_forward_and_V_hard_left, label='Ratio Fwd & Left')
+  #      plt.clf()
+   #     plt.plot(range(len(ratio_forward_and_V_hard_left)), ratio_forward_and_V_hard_left, label='Ratio Fwd & Left')
 
-        plt.xlabel('Episode')
-        plt.ylabel('Ratio Forward & left action taken')
-        plt.title('Ratio Forward')
-        plt.legend()
-        plt.pause(0.01)
+    #    plt.xlabel('Episode')
+     #   plt.ylabel('Ratio Forward & left action taken')
+      #  plt.title('Ratio Forward')
+       # plt.legend()
+        #plt.pause(0.01)
 
-    plt.ioff()
-    plt.show()    
+    #plt.ioff()
+   # plt.show()    
 
     return q_table
 
