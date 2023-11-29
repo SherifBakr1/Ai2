@@ -173,9 +173,6 @@ def get_state(front, right):
     global range_right
     global range_front
     end = False
-    if (range_corner == 0.0):
-        range_corner= 1.0
-
 
     if (right == "vclose" and front =="close" and range_corner <0.7 ):
         state = 0 
@@ -289,8 +286,6 @@ def get_state_initial(front, right):
     global range_front
     global range_right
     global state              
-    if (range_corner ==0.0):
-        range_corner = 1.0
 
     if (right == "vclose" and front =="close" and range_corner <0.7):
         state = 0 
@@ -458,9 +453,16 @@ def laserscan_callback(msg):
     ranges = msg.ranges
     # You changed the range of the right messages from 275:276 to what it currently is for training on u-turn
     range_front = min(msg.ranges[0:1]) # Front2 FOV (between 5 to -5 degrees)
-    range_right = min(msg.ranges[260:270])  # right FOV (between 300 to 345 degrees)
+    if range_front == 0:
+        range_front= 1.0
+
+    range_right = min(msg.ranges[260:280])  # right FOV (between 300 to 345 degrees)
+    if range_right == 0:
+        range_right == 1.0
     range_left=min(msg.ranges[85:95])
     range_corner = min(msg.ranges[300:302])
+    if range_corner == 0:
+        range_corner = 1.0
     
     # find the shortest obstacle of each side 
     #min_front,i_front = min( (range_front[i_front],i_front) for i_front in range(len(range_front)) )
