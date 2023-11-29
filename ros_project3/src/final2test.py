@@ -235,7 +235,10 @@ def init_env(episode, total_episode):
     
 def get_state(front, right):
     global state
-    end = False       
+    end = False
+    if (range_corner == 0.0):
+        range_corner= 1.0
+
     if (right == "vclose" and front =="close" and range_corner <0.7 ):
         state = 0 
         reward = -100
@@ -345,7 +348,8 @@ def get_state(front, right):
 
 def get_state_initial(front, right):
     global state              
-
+    if (range_corner ==0.0):
+        range_corner = 1.0
     if (right == "vclose" and front =="close" and range_corner <0.7):
         state = 0 
     if (right == "vclose" and front =="normal" and range_corner <0.7):
@@ -548,15 +552,15 @@ def laserscan_callback(msg):
     global left
     ranges = msg.ranges
     # You changed the range of the right messages from 275:276 to what it currently is for training on u-turn
-    range_front = msg.ranges[0:1] # Front2 FOV (between 5 to -5 degrees)
-    range_right = msg.ranges[225:315]  # right FOV (between 300 to 345 degrees)
-    range_left=msg.ranges[85:95]
+    range_front = min(msg.ranges[0:1]) # Front2 FOV (between 5 to -5 degrees)
+    range_right = min(msg.ranges[225:315])  # right FOV (between 300 to 345 degrees)
+    range_left=min(msg.ranges[85:95])
     range_corner = min(msg.ranges[300:302])
-
+    
     # find the shortest obstacle of each side 
-    min_front,i_front = min( (range_front[i_front],i_front) for i_front in range(len(range_front)) )
-    min_right,i_right = min( (range_right[i_right],i_right) for i_right in range(len(range_right)) )
-    min_left,i_left = min( (range_left[i_left],i_left) for i_left in range(len(range_left)) )
+    #min_front,i_front = min( (range_front[i_front],i_front) for i_front in range(len(range_front)) )
+    #min_right,i_right = min( (range_right[i_right],i_right) for i_right in range(len(range_right)) )
+    #min_left,i_left = min( (range_left[i_left],i_left) for i_left in range(len(range_left)) )
 # HIT_DISTANCE_THRESHOLD = 0.18          
 # VCLOSE_THRESHOLD= 0.30
 # CLOSE_THRESHOLD = 0.42
@@ -564,22 +568,22 @@ def laserscan_callback(msg):
 # #The below was 0.65 before running the left turn training.
 # LOST_DISTANCE_THRESHOLD =0.7    
     # front states
-    if (min_front< 0.3):
+    if (range_front< 0.3):
         front= "close"
-    elif (0.3 <min_front < 0.65):
+    elif (0.3 <range_front < 0.65):
         front = "normal"
-    elif (0.65 < min_front):
+    elif (0.65 < range_front):
         front = "far"
       
-    if (min_right <0.10):
+    if (range_right <0.10):
         right ="vclose"  
-    elif ( 0.10<min_right< 0.35):
+    elif ( 0.10<range_right< 0.35):
         right= "close"
-    elif (0.35 <min_right < 0.4):
+    elif (0.35 <range_right < 0.4):
         right = "normal0"
-    elif (0.4 <min_right < 0.65):
+    elif (0.4 <range_right < 0.65):
         right = "normal1"
-    elif (0.65 < min_right ):
+    elif (0.65 < range_right ):
         right = "far"
 
 
