@@ -461,7 +461,7 @@ def laserscan_callback(msg):
     if range_front == 0:
         range_front= 1.0
 
-    range_right = min(msg.ranges[245:295])  # right FOV (between 300 to 345 degrees)
+    range_right = min(msg.ranges[260:280])  # right FOV (between 300 to 345 degrees)
     if range_right == 0:
         range_right == 1.0
     range_left=min(msg.ranges[85:95])
