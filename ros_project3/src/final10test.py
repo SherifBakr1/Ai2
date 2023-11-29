@@ -97,19 +97,19 @@ def move_robot(speed_linear_x, speed_angular_z):
 def move_robot_by_action(action):
     if action == 'FORWARD_AND_TURN_LITTLE_LEFT':
         move_robot(0.10, 0.20)
-        rospy.sleep(0.3)
+        rospy.sleep(0.5)
     elif action == 'FORWARD':
         move_robot(0.10, 0.0)
-        rospy.sleep(0.3)
+        rospy.sleep(0.5)
     elif action == 'FORWARD_AND_TURN_LITTLE_RIGHT':
         move_robot(0.10, -0.20)
-        rospy.sleep(0.3)
+        rospy.sleep(0.5)
     elif action == 'FORWARD_AND_HARD_LEFT':
         move_robot(0.10, 0.60)
-        rospy.sleep(0.3)
+        rospy.sleep(0.5)
     elif action == 'FORWARD_AND_HARD_RIGHT':
         move_robot(0.10, -0.60)
-        rospy.sleep(0.3)
+        rospy.sleep(0.5)
 
 def stopRobot():
     move_robot(0.0,0.0)
@@ -173,6 +173,9 @@ def get_state(front, right):
     global range_right
     global range_front
     end = False
+    if (range_corner == 0.0):
+        range_corner= 1.0
+
 
     if (right == "vclose" and front =="close" and range_corner <0.7 ):
         state = 0 
@@ -286,6 +289,8 @@ def get_state_initial(front, right):
     global range_front
     global range_right
     global state              
+    if (range_corner ==0.0):
+        range_corner = 1.0
 
     if (right == "vclose" and front =="close" and range_corner <0.7):
         state = 0 
@@ -462,7 +467,7 @@ def laserscan_callback(msg):
     range_left=min(msg.ranges[85:95])
     range_corner = min(msg.ranges[300:302])
     if range_corner == 0:
-        range_corner = 1.0
+        range_corner =1.0
     
     # find the shortest obstacle of each side 
     #min_front,i_front = min( (range_front[i_front],i_front) for i_front in range(len(range_front)) )
