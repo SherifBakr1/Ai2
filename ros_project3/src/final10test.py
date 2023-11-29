@@ -379,6 +379,7 @@ def Qlearn():
 
         
         total_training_rewards = 0
+        end =False
         
         state = get_state_initial(front, right)     
         print("THE VERY FIRST STATE IS", state) 
