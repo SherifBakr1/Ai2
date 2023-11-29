@@ -480,15 +480,15 @@ def laserscan_callback(msg):
     elif (0.65 < range_front):
         front = "far"
       
-    if (range_right <0.2):
+    if (range_right <0.15):
         right ="vclose"  
-    elif ( 0.2<range_right< 0.4):
+    elif ( 0.15<range_right< 0.35):
         right= "close"
-    elif (0.4 <range_right < 0.45):
+    elif (0.35 <range_right < 0.4):
         right = "normal0"
-    elif (0.45 <range_right < 0.5):
+    elif (0.4 <range_right < 0.65):
         right = "normal1"
-    elif (0.5 < range_right ):
+    elif (0.65 < range_right ):
         right = "far"
 
 
